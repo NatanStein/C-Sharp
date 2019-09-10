@@ -5,13 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MenuInicial : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         
     }
-
-    // Update is called once per frame
     void Update()
     {
         
@@ -19,6 +16,10 @@ public class MenuInicial : MonoBehaviour
     public void CenaJogo()
     {
         SceneManager.LoadScene("Jogo1");
+    }
+    public void BackMainMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
     public void QuitGame()
     {

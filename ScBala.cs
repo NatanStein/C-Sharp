@@ -15,6 +15,10 @@ public class ScBala : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Confgeral.pause)
+        {
+            return;
+        }
         rd2d.velocity = transform.right * v;
     }
     private void OnCollisionEnter2D(Collision2D collision)

@@ -9,6 +9,7 @@ public class movepos : MonoBehaviour
     public bool noChao;
     public GameObject bala;
     public Transform arma;
+    public int contAmmo;
     Collider2D myCollider;
 
 
@@ -17,9 +18,15 @@ public class movepos : MonoBehaviour
         rd2d = GetComponent<Rigidbody2D>();
         myCollider = GetComponent < Collider2D >();
         noChao = false;
+        contAmmo = 10;
+
     }
     void Update()
     {
+        if(Confgeral.pause)
+        {
+            return;
+        }
         float velocidadeAtual = velocidade;
         myCollider.enabled = false;
         if (Physics2D.Raycast(transform.position,Vector3.down,1.5f))
@@ -45,9 +52,11 @@ public class movepos : MonoBehaviour
         {
             rd2d.AddForce(Vector2.up * fpulo);
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && contAmmo > 0)
         {
             Instantiate(bala, arma.position, arma.rotation);
+            contAmmo --;
+
         }
     }
 }
