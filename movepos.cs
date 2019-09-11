@@ -10,6 +10,7 @@ public class movepos : MonoBehaviour
     public GameObject bala;
     public Transform arma;
     public int contAmmo;
+    static public bool l, r;
     Collider2D myCollider;
 
 
@@ -41,11 +42,17 @@ public class movepos : MonoBehaviour
         if (Input.GetKey("a"))
         {
             rd2d.AddForce(Vector2.left * velocidade, ForceMode2D.Force);
+            transform.localScale = new Vector3(-1,1,1);
+            l = true;
+            r = false;
         }
 
         if (Input.GetKey("d"))
         {
             rd2d.AddForce(Vector2.right * velocidade, ForceMode2D.Force);
+            transform.localScale = new Vector3(1, 1, 1);
+            r = true;
+            l = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && noChao)

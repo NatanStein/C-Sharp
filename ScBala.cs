@@ -19,7 +19,14 @@ public class ScBala : MonoBehaviour
         {
             return;
         }
-        rd2d.velocity = transform.right * v;
+        if (movepos.r)
+        {
+            rd2d.velocity = transform.right * v;
+        }
+        if(movepos.l)
+        {
+            rd2d.velocity = -transform.right * v;
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
