@@ -15,7 +15,7 @@ public class MenuInicial : MonoBehaviour
     }
     public void CenaJogo()
     {
-        SceneManager.LoadScene("Jogo1");
+        SceneManager.LoadScene("F1");
     }
     public void BackMainMenu()
     {

@@ -4,37 +4,25 @@ using UnityEngine;
 
 public class ScBala : MonoBehaviour
 {
-    public Rigidbody2D rd2d;
-    public float v;
+    public Transform firepoint;
+    public GameObject bullet;
     void Start()
     {
-        rd2d = GetComponent<Rigidbody2D>();
-        Destroy(gameObject,2);
-    }
 
-    // Update is called once per frame
+    }
     void Update()
     {
-        if(Confgeral.pause)
+        if(Input.GetButtonDown("Fire1"))
         {
-            return;
+            shoot();
         }
-        if (movepos.r)
-        {
-            rd2d.velocity = transform.right * v;
-        }
-        if(movepos.l)
-        {
-            rd2d.velocity = -transform.right * v;
-        }
+
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    void shoot()
     {
-        if (collision.transform.tag != "NoDestroy")
-        {
-            Destroy(collision.transform.gameObject);
-            Destroy(gameObject);
-        }
+        Instantiate(bullet, firepoint.position, firepoint.rotation);
     }
+
 }
+
 

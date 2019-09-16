@@ -4,33 +4,33 @@ using UnityEngine;
 
 public class movepos : MonoBehaviour
 {
-    public float velocidade,fpulo;
+    public float velocidade, fpulo;
     public Rigidbody2D rd2d;
     public bool noChao;
     public GameObject bala;
-    public Transform arma;
     public int contAmmo;
     static public bool l, r;
+    public Animator animator;
     Collider2D myCollider;
 
 
     void Start()
     {
         rd2d = GetComponent<Rigidbody2D>();
-        myCollider = GetComponent < Collider2D >();
+        myCollider = GetComponent<Collider2D>();
         noChao = false;
-        contAmmo = 10;
-
     }
     void Update()
     {
-        if(Confgeral.pause)
+        animator.SetFloat("Vertical Speed",0);
+        animator.SetBool("Jump",false);
+        if (Confgeral.pause)
         {
             return;
         }
         float velocidadeAtual = velocidade;
         myCollider.enabled = false;
-        if (Physics2D.Raycast(transform.position,Vector3.down,1.5f))
+        if (Physics2D.Raycast(transform.position, Vector3.down, 0.5f))
         {
             noChao = true;
         }
@@ -45,25 +45,21 @@ public class movepos : MonoBehaviour
             transform.localScale = new Vector3(-1,1,1);
             l = true;
             r = false;
+            animator.SetFloat("Vertical Speed",1f);
         }
 
         if (Input.GetKey("d"))
         {
             rd2d.AddForce(Vector2.right * velocidade, ForceMode2D.Force);
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(1,1,1);
             r = true;
             l = false;
+            animator.SetFloat("Vertical Speed",1);
         }
-
         if (Input.GetKeyDown(KeyCode.Space) && noChao)
         {
+            animator.SetBool("Jump", true);
             rd2d.AddForce(Vector2.up * fpulo);
-        }
-        if (Input.GetMouseButtonDown(0) && contAmmo > 0)
-        {
-            Instantiate(bala, arma.position, arma.rotation);
-            contAmmo --;
-
         }
     }
 }
